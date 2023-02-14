@@ -113,6 +113,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   req.user = currentUser;
   //Needed for next features.
   req.saveduser = req.user;
+  console.log(req.user);
   next();
 });
 

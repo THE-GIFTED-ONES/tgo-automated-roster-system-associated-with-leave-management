@@ -28,7 +28,7 @@ exports.createLeave = catchAsync(async (req, res, next) => {
   const saved = req.saveduser;
   const newLeave = await LeaveRequest.create(req.body);
 
-  newLeave.empID = saved.empID;
+  newLeave.employee = saved._id;
   await newLeave.save();
 
   res.status(201).json({

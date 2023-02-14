@@ -1,12 +1,23 @@
 const mongoose = require('mongoose');
 
 const LeaveTypeSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    required: true,
+  userID: {
+    type: mongoose.Schema.types.ObjectId,
+    ref: 'User',
   },
-  noOfLeaves: {
-    type: Number,
+  leavedetails: {
+    causal: {
+      type: Number,
+    },
+    sick: {
+      type: Number,
+    },
+    maternity: {
+      type: Number,
+    },
+    paternity: {
+      type: Number,
+    },
   },
 });
 

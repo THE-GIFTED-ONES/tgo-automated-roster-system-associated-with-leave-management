@@ -36,7 +36,6 @@ const userSchema = new mongoose.Schema({
       ref: 'Leave',
     },
   ],
-  
   password: {
     type: String,
     required: [true, `Enter Employee's password !!`],
