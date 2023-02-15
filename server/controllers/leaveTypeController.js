@@ -1,7 +1,7 @@
-const LeaveType = require('../models/leaveTypeModel');
+const LeaveType = require('../models/leavetypeModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-const APIFeatures = require('../utils/apiFeatures');
+//const APIFeatures = require('../utils/apiFeatures');
 
 exports.updatedefaultLeaves = catchAsync(async (req, res, next) => {
   const leaveType = await LeaveType.findById(req.params.id);

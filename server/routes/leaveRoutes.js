@@ -8,7 +8,7 @@ router
   .route('/')
   .get(
     authController.protect,
-    authController.restrictTo('Product Manager', 'Junior Software Engineer'),
+    authController.restrictTo('Admin'),
     leaveController.getAllLeaves
   )
   .post(authController.protect, leaveController.createLeave);

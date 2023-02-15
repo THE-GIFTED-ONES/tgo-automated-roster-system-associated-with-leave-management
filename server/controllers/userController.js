@@ -1,5 +1,5 @@
 const User = require('../models/userModel');
-const APIFeatures = require('../utils/apiFeatures');
+//const APIFeatures = require('../utils/apiFeatures');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -59,6 +59,35 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   res.status(204).json({
     status: 'success',
     data: null,
+  });
+});
+
+exports.addToDepartment = catchAsync(async (req, res, next) => {
+  const { employeeID, departmentdetails, current, workSince, workTo } =
+    req.body;
+
+  const newassigneddepartment = {
+    departmentdetails,
+    current,
+    workSince,
+    workTo,
+  };
+
+  const user = await User.findByIdAndUpdate(employeeID);
+
+  if (user.departments.length > null) {
+    user.departments[0].current = false;
+    user.departments[0].workTo = workSince;
+  }
+
+  user.departments.unshift(newassigneddepartment);
+  await user.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
   });
 });
 

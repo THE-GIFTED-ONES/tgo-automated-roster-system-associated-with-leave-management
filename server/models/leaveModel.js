@@ -1,5 +1,7 @@
 const mongoose = require('mongoose'); // import mongoose
 
+//const LeaveType = require('./leavetypeModel');
+
 const LeaveSchema = new mongoose.Schema(
   {
     employee: {

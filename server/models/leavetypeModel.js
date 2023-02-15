@@ -21,6 +21,11 @@ const LeaveTypeSchema = new mongoose.Schema({
   },
 });
 
+LeaveTypeSchema.methods.gotLeave = function (leaveType, noofdays) {
+  this.leavedetails[leaveType] -= noofdays;
+  return this.save();
+};
+
 const LeaveType = mongoose.model('LeaveType', LeaveTypeSchema);
 
 module.exports = LeaveType;

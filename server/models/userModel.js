@@ -2,68 +2,90 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+//const Department = require('./departmentModel');
+//const AppError = require('../utils/appError');
 
-const userSchema = new mongoose.Schema({
-  emp_name: {
-    type: String,
-    required: [true, `Enter Employee's name !!`],
-  },
-  emp_email: {
-    type: String,
-    required: [true, `Enter Employee's email !!`],
-    unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, 'Please enter a valid email address'],
-  },
-  empID: {
-    type: String,
-    unique: true,
-    required: [true, `Enter Employee's ID !!`],
-  },
-  photo: String,
-  jobTitle: {
-    type: String,
-    required: [true, `Enter Employee's job title !!`],
-    default: 'Junior Software Engineer',
-  },
-  departments: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Department',
-  },
-  leavesTaken: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Leave',
+const userSchema = new mongoose.Schema(
+  {
+    emp_name: {
+      type: String,
+      required: [true, `Enter Employee's name !!`],
     },
-  ],
-  password: {
-    type: String,
-    required: [true, `Enter Employee's password !!`],
-    minlength: 8,
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, `Confirm Employee's password !!`],
-    validate: {
-      // This only works on CREATE and SAVE!!!
-      validator: function (el) {
-        return el === this.password;
+    emp_email: {
+      type: String,
+      required: [true, `Enter Employee's email !!`],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, 'Please enter a valid email address'],
+    },
+    empID: {
+      type: String,
+      unique: true,
+      required: [true, `Enter Employee's ID !!`],
+    },
+    photo: String,
+    jobTitle: {
+      type: String,
+      required: [true, `Enter Employee's job title !!`],
+      default: 'Junior Software Engineer',
+    },
+    leavesTaken: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Leave',
       },
-      message: 'Passwords are not the same!',
+    ],
+    password: {
+      type: String,
+      required: [true, `Enter Employee's password !!`],
+      minlength: 8,
+      select: false,
+    },
+    departments: [
+      {
+        departmentdetails: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Department',
+        },
+        current: {
+          type: Boolean,
+          default: true,
+        },
+        workSince: {
+          type: Date,
+        },
+        workTo: {
+          type: Date,
+        },
+      },
+    ],
+    passwordConfirm: {
+      type: String,
+      required: [true, `Confirm Employee's password !!`],
+      validate: {
+        // This only works on CREATE and SAVE!!!
+        validator: function (el) {
+          return el === this.password;
+        },
+        message: 'Passwords are not the same!',
+      },
+    },
+    passwordChangedAt: {
+      type: Date,
+    },
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
     },
   },
-  passwordChangedAt: {
-    type: Date,
-  },
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 //?PRE-MIDDLEWARE - DOCUMENT MIDDLEWARE: runs before .save() and .create()
 
@@ -98,6 +120,20 @@ userSchema.pre(/^find/, function (next) {
   next();
 });
 
+// userSchema.pre('save', async function (next) {
+//   try {
+//     const department = await Department.findById(this.currentdepartment);
+//     if (!department)
+//       return next(new AppError('No department found with that ID', 404));
+
+//     department.employees.addToSet(this._id);
+//     await department.save({ validateBeforeSave: false });
+//     next();
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 //?INSTANCE METHOD - available on all documents of a certain collection
 
 userSchema.methods.correctPassword = async function (
@@ -129,7 +165,7 @@ userSchema.methods.createPasswordResetToken = function () {
     .update(resetToken)
     .digest('hex');
 
-  console.log({ resetToken }, this.passwordResetToken);
+  //console.log({ resetToken }, this.passwordResetToken);
 
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
