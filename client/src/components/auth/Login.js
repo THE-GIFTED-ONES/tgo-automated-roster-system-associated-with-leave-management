@@ -110,7 +110,7 @@ class Login extends Component {
                         label="UserName"
                         variant="outlined"
                         className={classNames("login--email-input", {
-                          "is-invalid": errors.email,
+                          "is-invalid": errors.name,
                         })}
                         size="small"
                         value={this.state.email}
@@ -118,8 +118,8 @@ class Login extends Component {
                         color="primary"
                         name="email"
                       />
-                      {errors.email && (
-                        <div className="invalid-feedback">{errors.email}</div>
+                      {errors.name && (
+                        <div className="invalid-feedback">{errors.name}</div>
                       )}
                     </div>
 

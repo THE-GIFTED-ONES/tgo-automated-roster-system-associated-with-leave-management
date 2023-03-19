@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
-  const DB = process.env.DATABASE.replace(
-    '<PASSWORD>',
-    process.env.DATABASE_PASSWORD
-  );
+  const DB = process.env.DATABASE;
 
   try {
     mongoose.set('strictQuery', false);
@@ -19,3 +16,4 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
+ 

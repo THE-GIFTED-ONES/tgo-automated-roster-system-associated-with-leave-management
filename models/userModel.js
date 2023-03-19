@@ -1,38 +1,38 @@
-const crypto = require('crypto');
-const mongoose = require('mongoose');
-const validator = require('validator');
-const bcrypt = require('bcryptjs');
+const crypto = require("crypto");
+const mongoose = require("mongoose");
+const validator = require("validator");
+const bcrypt = require("bcryptjs");
 //const Department = require('./departmentModel');
 //const AppError = require('../utils/appError');
 
 const userSchema = new mongoose.Schema(
   {
-    emp_name: {
+    name: {
       type: String,
       required: [true, `Enter Employee's name !!`],
     },
-    emp_email: {
+    email: {
       type: String,
       required: [true, `Enter Employee's email !!`],
       unique: true,
       lowercase: true,
-      validate: [validator.isEmail, 'Please enter a valid email address'],
+      validate: [validator.isEmail, "Please enter a valid email address"],
     },
     empID: {
       type: String,
       unique: true,
-      required: [true, `Enter Employee's ID !!`],
+      //required: [true, `Enter Employee's ID !!`],
     },
     photo: String,
     jobTitle: {
       type: String,
-      required: [true, `Enter Employee's job title !!`],
-      default: 'Junior Software Engineer',
+      //required: [true, `Enter Employee's job title !!`],
+      default: "Junior Software Engineer",
     },
     leavesTaken: [
       {
         type: mongoose.Schema.ObjectId,
-        ref: 'Leave',
+        ref: "Leave",
       },
     ],
     password: {
@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema(
       {
         departmentdetails: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'Department',
+          ref: "Department",
         },
         current: {
           type: Boolean,
@@ -67,7 +67,7 @@ const userSchema = new mongoose.Schema(
         validator: function (el) {
           return el === this.password;
         },
-        message: 'Passwords are not the same!',
+        message: "Passwords are not the same!",
       },
     },
     passwordChangedAt: {
@@ -89,9 +89,9 @@ const userSchema = new mongoose.Schema(
 
 //?PRE-MIDDLEWARE - DOCUMENT MIDDLEWARE: runs before .save() and .create()
 
-userSchema.pre('save', async function (next) {
+userSchema.pre("save", async function (next) {
   //This function will run only if the password is modified
-  if (!this.isModified('password')) return next();
+  if (!this.isModified("password")) return next();
 
   //Hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12);
@@ -104,8 +104,8 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-userSchema.pre('save', function (next) {
-  if (!this.isModified('password') || this.isNew) return next();
+userSchema.pre("save", function (next) {
+  if (!this.isModified("password") || this.isNew) return next();
 
   this.passwordChangedAt = Date.now() - 1000;
   //?To make sure that the token is issued before the password is changed. Saving to the database takes some time. So we subtract 1 second from the current time. So that the token is issued before the password is changed.
@@ -158,12 +158,12 @@ userSchema.methods.changedPasswordafter = function (JWTTimestamp) {
 };
 
 userSchema.methods.createPasswordResetToken = function () {
-  const resetToken = crypto.randomBytes(32).toString('hex');
+  const resetToken = crypto.randomBytes(32).toString("hex");
 
   this.passwordResetToken = crypto
-    .createHash('sha256')
+    .createHash("sha256")
     .update(resetToken)
-    .digest('hex');
+    .digest("hex");
 
   //console.log({ resetToken }, this.passwordResetToken);
 
@@ -173,6 +173,6 @@ userSchema.methods.createPasswordResetToken = function () {
 };
 
 // Create a model from the schema
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 // Export the model
 module.exports = User;
