@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to HRM</title>
+    <style>
+      body {
+        background-color: #f9f9f9;
+      }
+
+      .email-container {
+        border: 5px solid orange;
+        border-radius: 20px;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 600px;
+      }
+
+      .email-title {
+        background: linear-gradient(to right, orange, green);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+
+      .email-body {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+      }
+
+      .reset-link {
+        display: block;
+        margin: 30px auto;
+        text-align: center;
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 18px;
+        width: fit-content;
+      }
+
+      .reset-link:hover {
+        background-color: #c82333;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-container">
+      <div class="email-title">Welcome to HRM</div>
+      <div class="email-body">
+        <p>Dear {{Employee Name}},</p>
+        <p>
+          We are delighted to welcome you to our Rooster Management System! You
+          have been added as a new user by our admin to manage your leaves and
+          attendance effectively. As a new employee, you will be receiving a
+          welcome email from us to help you get started with the system.
+        </p>
+        <p>
+          To activate your account and set a password, please click on the
+          following link:
+          <a class="reset-link" href="{{Reset_URL}}">Reset Password</a>
+        </p>
+        <p>
+          Our Rooster Management System is a powerful tool that will help you
+          keep track of your attendance and leaves, so you can focus on your
+          work without worrying about your attendance. With this system, you
+          will be able to apply for leaves, view your attendance history, and
+          manage your work schedule with ease.
+        </p>
+        <p>
+          If you have any questions or concerns, please feel free to reach out
+          to us at
+          <a href="mailto:[contact@orangehrm.lk]">[Insert Email]</a>. We are
+          always here to help you with any issues you may face while using our
+          Rooster Management System.
+        </p>
+        <p>
+          Once again, welcome to our team! We look forward to working with you.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
