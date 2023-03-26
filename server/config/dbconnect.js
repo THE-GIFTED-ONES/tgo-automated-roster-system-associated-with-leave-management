@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { createAdminIfNoneExists } = require('../utils/createAdminUser');
 
 const connectDB = async () => {
   const DB = process.env.DATABASE.replace(

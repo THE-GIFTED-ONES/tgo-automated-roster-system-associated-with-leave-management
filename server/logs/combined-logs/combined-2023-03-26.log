@@ -1,0 +1,11 @@
+{"error":{"status":"error","statusCode":500},"level":"error","message":"ERROR: Cannot read properties of undefined (reading 'split')","timestamp":"2023-03-26 08:13:00.363 AM"}
+{"error":{"status":"error","statusCode":500},"level":"error","message":"ERROR: htmlToText.fromString is not a function","timestamp":"2023-03-26 08:14:40.616 AM"}
+{"error":{"status":"error","statusCode":500},"level":"error","message":"ERROR: this.newTransport is not a function","timestamp":"2023-03-26 08:21:39.669 AM"}
+{"error":{"isOperational":true,"status":"fail","statusCode":400},"level":"error","message":"ERROR: Please provide empID and password","timestamp":"2023-03-26 08:34:07.813 AM"}
+{"error":{"code":11000,"index":0,"keyPattern":{"email":1},"keyValue":{"email":"user09@gmail.com"},"status":"error","statusCode":500},"level":"error","message":"ERROR: E11000 duplicate key error collection: dev-database.users index: email_1 dup key: { email: \"user09@gmail.com\" }","timestamp":"2023-03-26 08:51:42.449 AM"}
+{"error":{"isOperational":true,"status":"fail","statusCode":404},"level":"error","message":"ERROR: There is no user with email address","timestamp":"2023-03-26 09:06:36.754 AM"}
+{"error":{"isOperational":true,"status":"fail","statusCode":404},"level":"error","message":"ERROR: There is no user with email address","timestamp":"2023-03-26 09:06:44.990 AM"}
+{"error":{"isOperational":true,"status":"fail","statusCode":404},"level":"error","message":"ERROR: There is no user with email address","timestamp":"2023-03-26 09:06:54.064 AM"}
+{"error":{"isOperational":true,"status":"fail","statusCode":404},"level":"error","message":"ERROR: There is no user with email address","timestamp":"2023-03-26 09:09:34.289 AM"}
+{"error":{"isOperational":true,"status":"fail","statusCode":404},"level":"error","message":"ERROR: There is no user with email address","timestamp":"2023-03-26 09:09:38.251 AM"}
+{"error":{"code":11000,"index":0,"keyPattern":{"empID":1},"keyValue":{"empID":"999897"},"status":"error","statusCode":500},"level":"error","message":"ERROR: E11000 duplicate key error collection: dev-database.users index: empID_1 dup key: { empID: \"999897\" }","timestamp":"2023-03-26 10:23:48.838 AM"}
